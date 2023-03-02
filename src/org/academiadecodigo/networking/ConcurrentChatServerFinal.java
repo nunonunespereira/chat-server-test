@@ -19,14 +19,14 @@ public class ConcurrentChatServerFinal {
     private static ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
     public static void main(String[] args) throws Exception {
-        try (ServerSocket listener = new ServerSocket(8888)) {
+            ServerSocket listener = new ServerSocket(8888);
             System.out.println("Server running on port 8888.");
+
             while (true) {
                 Socket clientSocket = listener.accept();
                 System.out.println("New client connected to " + clientSocket);
                 threadPool.execute(new ClientHandler(clientSocket));
             }
-        }
     }
 
     private static class ClientHandler implements Runnable {
